@@ -4,66 +4,9 @@
 
 using namespace std;
 
-struct Employee {
-string name;
-int id;
-string position;
-double salary;
-};
+int opt;
 
-vector<Employee> employeeList;
-
-void addEmployee() {
-Employee newEmployee;
-cout << "Enter the employee's name: ";
-cin >> newEmployee.name;
-cout << "Enter the employee's ID number: ";
-cin >> newEmployee.id;
-cout << "Enter the employee's position: ";
-cin >> newEmployee.position;
-cout << "Enter the employee's salary: ";
-cin >> newEmployee.salary;
-employeeList.push_back(newEmployee);
-cout << "Employee added successfully!" << endl;
-}
-
-void viewAllEmployees() {
-cout << "ID\tName\tPosition\tSalary" << endl;
-for (int i = 0; i < employeeList.size(); i++) {
-cout << employeeList[i].id << "\t" << employeeList[i].name << "\t" << employeeList[i].position << "\t" << employeeList[i].salary << endl;
-}
-}
-
-int main() {
-int choice;
-while (true) {
-cout << "1. Add a new employee" << endl;
-cout << "2. View all employees" << endl;
-cout << "3. Exit" << endl;
-cout << "Enter your choice: ";
-cin >> choice;
-if (choice == 1) {
-addEmployee();
-} else if (choice == 2) {
-viewAllEmployees();
-} else if (choice == 3) {
-break;
-} else {
-cout << "Invalid choice. Try again." << endl;
-}
-}
-return 0;
-}
-
-
-
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
-int opt, i = 0;
+int main();
 
 struct employee{
     int id;
@@ -72,7 +15,7 @@ struct employee{
     string depart;
 };
 
-vector <employee> employeeList;
+vector<employee>employeeList;
 
  void addEmployee()
  {
@@ -87,16 +30,55 @@ vector <employee> employeeList;
 
      employeeList.push_back(newEmployee);
 
-     for(int i = 1; i <= employeeList.size(); i++)
+     cout << "\t BACK [0]\t\t QUIT [1] : "; cin >> opt;
+
+     switch(opt)
      {
-         cout << "\t" << i << "\t\t" << employeeList[i].id << "\t\t" << employeeList[i].name << "\t\t" << employeeList[i].email << "\t\t" << employeeList[i].depart;
+     case 0:
+        system("cls");
+        main();
+        break;
+
+     case 1:
+         system("cls");
+         cout << "\n\t\t Thank You for using my Program!";
+         break;
      }
  }
 
- void removeEmployee()
+void removeEmployee()
  {
+     int id;
      cout << "\n\t\t EMPLOYEE-MANAGEMENT-SYSTEM\n";
      cout << "\t\t    * Remove Employee *\n";
+     cout << "\t\t Enter the ID NO.: "; cin >> id;
+
+     for(int i = 0; i < employeeList.size(); i++)
+     {
+         if(employeeList[i].id == id)
+         {
+             employeeList.erase(employeeList.begin() + i);
+         }
+         else
+         {
+             cout << "Employee with ID " << id << " not found!";
+         }
+     }
+
+     cout << "\t BACK [0]\t\t QUIT [1] : "; cin >> opt;
+
+     switch(opt)
+     {
+     case 0:
+        system("cls");
+        main();
+        break;
+
+     case 1:
+         system("cls");
+         cout << "\n\t\t Thank You for using my Program!";
+         break;
+     }
  }
 
  void listOfEmplo()
@@ -105,9 +87,24 @@ vector <employee> employeeList;
      cout << "\t\t\t\t       * List of Employee *\n";
      cout << "\n\t     NO.\t\tID\t\tNAME\t\tEMAIL\t\tDEPARTMENT" << endl;
 
-     for(int i = 1; i <= employeeList.size(); i++)
+     for(int i = 0; i < employeeList.size(); i++)
      {
-         cout << "\t" << i << "\t\t" << employeeList[i].id << "\t\t" << employeeList[i].name << "\t\t" << employeeList[i].email << "\t\t" << employeeList[i].depart;
+         cout << "\t     " << i + 1 << "    \t\t" << employeeList[i].id << "\t\t" << employeeList[i].name << "\t\t" << employeeList[i].email << "\t\t" << employeeList[i].depart << endl;
+     }
+
+     cout << "\n\t\t\t\t       BACK [0]\t\t QUIT [1] : "; cin >> opt;
+
+     switch(opt)
+     {
+     case 0:
+        system("cls");
+        main();
+        break;
+
+     case 1:
+         system("cls");
+         cout << "\n\t\t Thank You for using my Program!";
+         break;
      }
  }
 
@@ -137,7 +134,12 @@ int main()
         system("cls");
         listOfEmplo();
         break;
-    }
 
+    case 4:
+        system("cls");
+        cout << "\n\t\t Thank You for using my Program!";
+        return 0;
+        break;
+    }
     return 0;
 }
