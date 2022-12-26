@@ -23,10 +23,10 @@ vector<employee>employeeList;
 
      cout << "\n\t\t EMPLOYEE-MANAGEMENT-SYSTEM\n";
      cout << "\t\t      * Add Employee *\n";
-     cout << "\t ID : "; cin >> newEmployee.id;
-     cout << "\t NAME : "; cin >> newEmployee.name;
-     cout << "\t EMAIL : "; cin >> newEmployee.email;
-     cout << "\t DEPARTMENT : "; cin >> newEmployee.depart;
+     cout << "\t ID : "; cin >> newEmployee.id; cin.ignore();
+     cout << "\t NAME : "; getline(cin, newEmployee.name);
+     cout << "\t EMAIL : "; cin >> newEmployee.email; cin.ignore();
+     cout << "\t DEPARTMENT : "; getline(cin, newEmployee.depart);
 
      employeeList.push_back(newEmployee);
 
