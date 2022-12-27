@@ -1,74 +1,103 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <map>
+#include <string>
 
-#define MAX_USERNAME_LEN 32
-#define MAX_PASSWORD_LEN 32
+using namespace std;
 
-struct user {
-    char username[MAX_USERNAME_LEN];
-    char password[MAX_PASSWORD_LEN];
+int opt;
+string username, password;
+
+struct account {
+    string username;
+    string password;
 };
 
-struct user users[1024];
-int num_users = 0;
+map<string, account> accList;
 
-void register_user()
+void registerPage()
 {
-    printf("Enter a username: ");
-    scanf("%s", users[num_users].username);
+    cout << "\n\n\t\t\t LOGIN & REGISTER SYSTEM";
+    cout << "\n\n\t\t\t    * REGISTER PAGE *";
+    cout << "\n\n\t\t Enter a username: "; cin >> username;
 
-    printf("Enter a password: ");
-    scanf("%s", users[num_users].password);
 
-    num_users++;
+    if(accList.count(username) > 0 )
+    {
+        cout << "\n\t\t Sorry, that username is already taken. Please choose a different one." << endl;
+    }
+    else
+    {
+        cout << "\t\t Enter a Password : "; cin >> password;
+
+        account newAcc;
+        newAcc.username = username;
+        newAcc.password = password;
+
+        accList[username] = newAcc;
+
+        cout << "\n\t\t Registration Successful!" << endl;
+    }
 }
 
-int login()
+void loginPage()
 {
-    char username[MAX_USERNAME_LEN];
-    char password[MAX_PASSWORD_LEN];
+    cout << "\n\n\t\t\t LOGIN & REGISTER SYSTEM";
+    cout << "\n\n\t\t\t     * LOGIN PAGE *";
+    cout << "\n\n\t\t Enter your Username : "; cin >> username;
 
-    printf("Enter a username: ");
-    scanf("%s", username);
+    if(accList.count(username) > 0 )
+    {
+        cout << "\t\t Enter your Password : "; cin >> password;
 
-    printf("Enter a password: ");
-    scanf("%s", password);
-
-    for (int i = 0; i < num_users; i++) {
-        if (strcmp(username, users[i].username) == 0 && strcmp(password, users[i].password) == 0) {
-            return 1;
+        if(accList[username].password == password)
+        {
+            cout << "\n\t\t Login Successful!" << endl;
+        }
+        else
+        {
+            cout << "\n\t\t Invalid Username or Password. Please try Again." << endl;
         }
     }
-
-    return 0;
+    else
+    {
+        cout << "\n\t\t Invalid Username or Password. Please try Again." << endl;
+    }
 }
 
-int main(int argc, char *argv[])
+int main()
 {
-    while (1) {
-        printf("1. Register\n");
-        printf("2. Login\n");
-        printf("3. Quit\n");
+    while(1)
+    {
+        cout << "\n\n\t\t\t LOGIN & REGISTER SYSTEM";
+        cout << "\n\n\t\t 1 - Register";
+        cout << "\n\t\t 2 - LogIn";
+        cout << "\n\t\t 3 - Quit";
+        cout << "\n\n\t\t Pick a Number : "; cin >> opt;
 
-        int choice;
-        scanf("%d", &choice);
-
-        if (choice == 1) {
-            register_user();
-        } else if (choice == 2) {
-            if (login()) {
-                printf("Logged in successfully!\n");
-            } else {
-                printf("Invalid username or password.\n");
-            }
-        } else if (choice == 3) {
+        switch(opt)
+        {
+        case 1:
+            system("cls");
+            registerPage();
             break;
-        } else {
-            printf("Invalid choice.\n");
+
+        case 2:
+            system("cls");
+            loginPage();
+            break;
+
+        case 3:
+            system("cls");
+            cout << "\n\n\t\t\t Thank You for Using My Program!";
+            return 0;
+            break;
+
+        default:
+            system("cls");
+            cout << "\n\n\t\t\t Invalid Number. Please Try Again!";
+            break;
         }
     }
 
     return 0;
 }
-    
